@@ -61,4 +61,13 @@ RSpec.describe "Tasks", type: :request do
       expect(response.body).to be_json_eql(valid_task_create_json(title).to_json)
     end
   end
+
+  describe "DELETE /api/v1/tasks/:id" do
+    let(:task) { Task.create!(title: "Task1") }
+
+    it "creates task" do
+      delete task_path(task), params: { data: { type: "tasks", id: task.id } }, headers: header
+      expect(response).to have_http_status(204)
+    end
+  end
 end
