@@ -30,6 +30,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Testing framework for rails
   gem 'rspec-rails', '~> 3.6'
+  # RSpec matchers for testing JSON content
+  gem 'json_spec', '~> 1.1'
 end
 
 group :development do
