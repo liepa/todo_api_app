@@ -5,7 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
 # Use sqlite3 as the database for Active Record
@@ -34,6 +33,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
   # RSpec matchers for testing JSON content
   gem 'json_spec', '~> 1.1'
+  # Automatic Ruby code style checking tool
+  gem 'rubocop', '~> 0.49', require: false
 end
 
 group :development do

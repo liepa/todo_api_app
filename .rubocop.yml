@@ -1,0 +1,58 @@
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - db/schema.rb
+
+StringLiterals:
+  Enabled: false
+Documentation:
+  Enabled: false
+LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 25
+Metrics/BlockLength:
+  Exclude:
+    - config/initializers/simple_form.rb
+    - lib/tasks/auto_annotate_models.rake
+Style/HashSyntax:
+  Enabled: false
+Layout/DotPosition:
+  EnforcedStyle: trailing
+Layout/IndentArray:
+  EnforcedStyle: consistent
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/SpaceInsideBrackets:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Layout/LeadingCommentSpace:
+  Enabled: false
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Layout/AlignHash:
+  Enabled: false
+Layout/ExtraSpacing:
+  Enabled: false
+Layout/AlignParameters:
+  Enabled: false
+Style/EachWithObject:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+Bundler/OrderedGems:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Style/Lambda:
+  EnforcedStyle: literal
+Rails:
+  Enabled: true
