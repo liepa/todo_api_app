@@ -49,4 +49,16 @@ RSpec.describe "Tasks", type: :request do
       expect(response.body).to be_json_eql(valid_task_create_json(title).to_json)
     end
   end
+
+  describe "PATCH /api/v1/tasks/:id" do
+    let(:task) { Task.create!(title: "Task1") }
+
+    it "creates task" do
+      title = "Updated Clean house"
+      patch task_path(task), params: { data: { type: "undefined", id: "undefiined", attributes: { title: title }} }, headers: header
+      expect(response).to have_http_status(200)
+      expect(response.body).to have_json_size(3).at_path("data")
+      expect(response.body).to be_json_eql(valid_task_create_json(title).to_json)
+    end
+  end
 end
