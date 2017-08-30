@@ -25,6 +25,8 @@ RSpec.describe "Tasks", type: :request do
     }
   end
 
+  let(:header) { { "ACCEPT": "application/json" } }
+
   before(:each) do
     @task = Task.create!(title: "Task1")
   end
@@ -40,7 +42,6 @@ RSpec.describe "Tasks", type: :request do
 
   describe "POST /api/v1/tasks" do
     it "creates task" do
-      header = { "ACCEPT" => "application/json" }
       title = "Clean house"
       post tasks_path, params: { data: { type: "undefined", id: "undefiined", attributes: { title: title }} }, headers: header
       expect(response).to have_http_status(201)
