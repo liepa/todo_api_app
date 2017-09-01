@@ -1,30 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Tasks", type: :request do
-  def valid_task_list_json(title)
-    {
-      "data": [
-        {
-          "type": "tasks",
-          "attributes": {
-            "title": title
-          }
-        }
-      ]
-    }
-  end
-
-  def valid_task_create_json(title)
-    {
-      "data": {
-        "type": "tasks",
-        "attributes": {
-          "title": title
-        }
-      }
-    }
-  end
-
   let(:header) { { "ACCEPT": "application/json" } }
 
   before(:each) do
@@ -36,7 +12,7 @@ RSpec.describe "Tasks", type: :request do
       get tasks_path
       expect(response).to have_http_status(200)
       expect(response.body).to have_json_size(1).at_path("data")
-      expect(response.body).to be_json_eql(valid_task_list_json(@task.title).to_json)
+      expect(response.body).to be_json_eql(valid_list_json(title: @task.title).to_json)
     end
   end
 
@@ -46,27 +22,23 @@ RSpec.describe "Tasks", type: :request do
       post tasks_path, params: { data: { type: "undefined", id: "undefiined", attributes: { title: title }} }, headers: header
       expect(response).to have_http_status(201)
       expect(response.body).to have_json_size(3).at_path("data")
-      expect(response.body).to be_json_eql(valid_task_create_json(title).to_json)
+      expect(response.body).to be_json_eql(valid_create_json(title: title).to_json)
     end
   end
 
   describe "PATCH /api/v1/tasks/:id" do
-    let(:task) { Task.create!(title: "Task1") }
-
     it "creates task" do
       title = "Updated Clean house"
-      patch task_path(task), params: { data: { type: "undefined", id: "undefiined", attributes: { title: title }} }, headers: header
+      patch task_path(@task), params: { data: { type: "undefined", id: "undefiined", attributes: { title: title }} }, headers: header
       expect(response).to have_http_status(200)
       expect(response.body).to have_json_size(3).at_path("data")
-      expect(response.body).to be_json_eql(valid_task_create_json(title).to_json)
+      expect(response.body).to be_json_eql(valid_create_json(title: title).to_json)
     end
   end
 
   describe "DELETE /api/v1/tasks/:id" do
-    let(:task) { Task.create!(title: "Task1") }
-
     it "creates task" do
-      delete task_path(task), params: { data: { type: "tasks", id: task.id } }, headers: header
+      delete task_path(@task), params: { data: { type: "tasks", id: @task.id } }, headers: header
       expect(response).to have_http_status(204)
     end
   end
