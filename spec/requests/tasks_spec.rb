@@ -27,11 +27,9 @@ RSpec.describe "Tasks", type: :request do
   end
 
   describe "PATCH /api/v1/tasks/:id" do
-    let(:task) { Task.create!(title: "Task1") }
-
     it "creates task" do
       title = "Updated Clean house"
-      patch task_path(task), params: { data: { type: "undefined", id: "undefiined", attributes: { title: title }} }, headers: header
+      patch task_path(@task), params: { data: { type: "undefined", id: "undefiined", attributes: { title: title }} }, headers: header
       expect(response).to have_http_status(200)
       expect(response.body).to have_json_size(3).at_path("data")
       expect(response.body).to be_json_eql(valid_create_json(title: title).to_json)
@@ -39,10 +37,8 @@ RSpec.describe "Tasks", type: :request do
   end
 
   describe "DELETE /api/v1/tasks/:id" do
-    let(:task) { Task.create!(title: "Task1") }
-
     it "creates task" do
-      delete task_path(task), params: { data: { type: "tasks", id: task.id } }, headers: header
+      delete task_path(@task), params: { data: { type: "tasks", id: @task.id } }, headers: header
       expect(response).to have_http_status(204)
     end
   end
